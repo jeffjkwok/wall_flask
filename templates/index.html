@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Wall</title>
+	<style type="text/css">
+		#comment {
+			margin-left: 20px;
+		}
+	</style>
+</head>
+<body>
+	Hello, {{session['username']}}
+	<a href="/logout">logout</a>
+	<h1>The Wall</h1>
+	<form action='/post' method='post'>
+		<input type="hidden" name="message">
+		<textarea name='content'></textarea><br>
+		<input type="submit" value='Post Messsage'>
+	</form>
+	<hr>
+	{% for message in messages %}
+		{{message['username']}} posted: 
+		<p>{{message['content']}}</p>
+		<div id='comment'>
+			{% for comment in comments %}
+				{% if message['id'] == comment['message_id'] %}
+					{{comment['username']}} commented: 
+					<p>{{comment['content']}}</p>
+				{% endif %}
+			{% endfor %}
+			<form action='/post' method='post'>
+				<input type="hidden" name="comment">
+				<input type="hidden" name="message_id" value={{message['id']}}>
+				<textarea name='content'></textarea><br>
+				<input type="submit" value='Post Comment'>
+			</form>
+		</div>
+	<hr>
+	<br>
+	{% endfor %}
+</body>
+</html>
