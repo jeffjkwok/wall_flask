@@ -4,17 +4,23 @@
 <head>
 	<title>Login | The Wall</title>
 	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css')}}">
+	<link rel="stylesheet" type="text/css" href="../static/css/stylesheet.css">
+	<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css')}}"> -->
 </head>
 <body>
-	{% with messages = get_flashed_messages() %}
+	<div class="header">
+		<h1>Welcome to the Wall</h1>
+		{% with messages = get_flashed_messages() %}
 		{% if messages %}
-			{% for message in messages %}
-				<p>{{message}}</p>
-			{% endfor %}
+		{% for message in messages %}
+		<div class="alert alert-danger" role='alert'>
+			<p>{{message}}</p>
+		</div>
+		{% endfor %}
 		{% endif %}
-	{% endwith %}
-	<h1>The Wall <sup>*without Matt Damon</sup></h1>
+		{% endwith %}
+	</div>
+	<!-- <h1>The Wall <sup>*without Matt Damon</sup></h1> -->
 	{% if session['reg'] != True %}
 	<div id='form' class='container'>
 		<h3>Register</h3>

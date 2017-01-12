@@ -29,7 +29,7 @@ def login_reg():
 	if request.form.get('login') is not None:
 		if len(request.form['email'])<1 or not EMAIL_REGEX.match(request.form['email']):
 			validations +=1
-			flash('Email cannot be black or is invalid')
+			flash('Email cannot be blank or is invalid')
 		if len(request.form['password'])<1:
 			validations +=1
 			flash('Password was empty')
@@ -39,8 +39,9 @@ def login_reg():
 			if user and bcrypt.check_password_hash(user[0]['password'], request.form['password']):
 				session['username'] = user[0]['username']
 				session['id'] = user[0]['id']
-				print 'cat'
 				return redirect('/dashboard')
+			else:
+				flash('There is no account associated with this email')
 		return redirect('/')
 
 	elif request.form.get('register') is not None:
@@ -50,7 +51,10 @@ def login_reg():
 			flash('Username needs to be longer than 4 characters')
 		if len(request.form['email'])<1 or not EMAIL_REGEX.match(request.form['email']):
 			validations +=1
-			flash('Email cannot be black or is invalid')
+			flash('Email cannot be blank or is invalid')
+		query = 'SELECT username FROM users WHERE email = "{}"'.format(request.form['email'])
+		user = mysql.query_db(query)
+		print user[0]
 		if len(request.form['password'])<4 or request.form['password'] != request.form['c_password']:
 			validations +=1
 			flash('Password cannot be blank or does not match')
@@ -81,7 +85,7 @@ def dashboard():
 	messages = mysql.query_db(query)
 	query = "SELECT comments.content, comments.created_at, users.username, posts.id AS message_id FROM comments LEFT JOIN users ON comments.user_id=users.id LEFT JOIN posts ON comments.post_id=posts.id"
 	comments = mysql.query_db(query)
-	print comments
+	# print comments
 
 	return render_template('index.html', messages=messages, comments=comments)
 
