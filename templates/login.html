@@ -4,37 +4,43 @@
 <head>
 	<title>Login | The Wall</title>
 	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css')}}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css')}}">
 </head>
 <body>
-	{% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
-	<p>{{message}}</p>
-	{% endfor %} {% endif %} {% endwith %}
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+				<p>{{message}}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	<h1>The Wall <sup>*without Matt Damon</sup></h1>
+	{% if session['reg'] != True %}
 	<div id='form' class='container'>
-		<h1>Register</h1>
-		<form action='/process' method='post' class='form-horiztonal'>
+		<h3>Register</h3>
+		<form action='/process' method='post' class='form-horizontal'>
 			<input type="hidden" name="register">
 			<div class="form-group">
-				<div class="col-sm-7 col-md-7 col-lg-7" style="display:inline">
-					<label for='name' class='control-label'>Username:</label>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<label for='name'>Username:</label>
 					<input type="text" class='form-control' name="username" id='name'>
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-7 col-md-7 col-lg-7" style="display:inline">
-					<label for='email' class='control-label'>Email:</label>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<label for='email'>Email:</label>
 					<input type="text" class='form-control' name="email" id='email'>
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-7 col-md-7 col-lg-7" style="display:inline">
-					<label for='pwd' class='control-label'>Password:</label>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<label for='pwd'>Password:</label>
 					<input type="password" class='form-control' name="password" id='pwd'>
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-7 col-md-7 col-lg-7" style="display:inline">
-					<label for='cpwd' class='control-label'>Confirm Password:</label>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<label for='cpwd'>Confirm Password:</label>
 					<input type="password" class='form-control' name="c_password" id='cpwd'>
 				</div>
 			</div>
@@ -44,21 +50,25 @@
 				</div>
 			</div>
 		</form>
+		<form action="/" method='post' class='toggle'>
+			<input type="hidden" value=''>
+			<a>Have an account? Click Here</a>
+		</form>
 	</div>
-	<br>
-	<hr>
+{% endif %}
+{% if session['reg'] == True %}
 	<div id='form2' class='container'>
-		<h1>Login</h1>
+		<h3>Login</h3>
 		<form action='/process' method='post' class='form-horizontal'>
 			<input type="hidden" name="login">
 			<div class="form-group">
-				<div class="col-sm-7 col-md-7 col-lg-7" style="display:inline">
+				<div class="col-sm-6 col-md-6 col-lg-6" style="display:inline">
 					<label for="email_l">Email:</label>
 					<input type="text" class='form-control' name="email" id="email_l">
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-7 col-md-7 col-lg-7" style="display:inline">
+				<div class="col-sm-6 col-md-6 col-lg-6" style="display:inline">
 					<label for="pwd_l">Password:</label>
 					<input type="password" class='form-control' name="password" id='pwd_l'>
 				</div>
@@ -69,9 +79,19 @@
 				</div>
 			</div>
 		</form>
+		<form action="/" method='post' class='toggle'>
+			<input type="hidden" value=''>
+			<a>Don't have an account? Click Here</a>
+		</form>
 	</div>
+{% endif %}
 </body>
 <script src="../static/js/jquery-3.1.1.min.js" charset="utf-8"></script>
 <script src="../static/js/bootstrap.min.js" charset="utf-8"></script>
+<script>
+	$('.toggle a').on("click", function(){
+		$('.toggle').submit()
+	})
+</script>
 
 </html>

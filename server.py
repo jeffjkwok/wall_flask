@@ -11,7 +11,17 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 @app.route('/')
 def loginPage():
+	if 'reg' not in session:
+		session['reg'] = True
 	return render_template('login.html')
+
+@app.route('/', methods=['POST'])
+def flipForm():
+	if session['reg'] == True:
+		session['reg'] = False
+	else:
+		session['reg'] = True
+	return redirect('/')
 
 @app.route('/process', methods=['POST'])
 def login_reg():
