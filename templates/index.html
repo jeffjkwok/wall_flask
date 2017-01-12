@@ -3,11 +3,7 @@
 <head>
 	<title>The Wall</title>
 	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
-	<style type="text/css">
-		#comment {
-			margin-left: 20px;
-		}
-	</style>
+	<link rel="stylesheet" href="../static/css/dashstyle.css">
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -16,34 +12,46 @@
 				<p class="navbar-text navbar-left">Hello, {{session['username']}}</p>
 				<ul class="nav navbar-nav navbar-right pull-right">
 					<li>
-						<a href="/logout" class='btn btn-default nav-bar-btn-sm'>Logout <span class="glyphicon glyphicon-log-out"></a>
+						<a href="/logout" class='btn navbar-btn-sm'>Logout <span class="glyphicon glyphicon-log-out"></a>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<h1>The Wall</h1>
-	<form action='/post' method='post'>
+	<form action='/post' class='container' method='post' id='msg'>
 		<input type="hidden" name="message">
-		<textarea name='content'></textarea><br>
-		<input type="submit" value='Post Messsage'>
+		<div class="form-group col-xs-10 col-sm-6 col-md-5 col-lg-4">
+			<label for="message">Post a Message:</label>
+			<textarea name='content' id='message' class='form-control' rows='5'></textarea>
+		</div>
+		<div class="form-group col-sm-10">
+			<input type="submit" class='btn btn-default' value='Post Messsage'>
+		</div>
 	</form>
 	<hr>
 	{% for message in messages %}
-		{{message['username']}} posted:
-		<p>{{message['content']}}</p>
-		<div id='comment'>
+		<div class="message container">
+			<span><b>{{message['username']}} posted:</b></span>
+			<p>{{message['content']}}</p>
+		</div>
+		<div id='comment' class='comment container'>
 			{% for comment in comments %}
 				{% if message['id'] == comment['message_id'] %}
-					{{comment['username']}} commented:
+					<span><b>{{comment['username']}} commented:</b></span>
 					<p>{{comment['content']}}</p>
 				{% endif %}
 			{% endfor %}
-			<form action='/post' method='post'>
+			<form action='/post' method='post' class='container' id='cmt'>
 				<input type="hidden" name="comment">
 				<input type="hidden" name="message_id" value={{message['id']}}>
-				<textarea name='content'></textarea><br>
-				<input type="submit" value='Post Comment'>
+				<div class="form-group col-xs-10 col-sm-6 col-md-5 col-lg-4">
+					<label for="comment ">Add a Comment:</label>
+					<textarea name='content' id='comment' class='form-control' rows='3'></textarea>
+				</div>
+				<div class="form-group col-sm-10">
+					<input type="submit" class='btn btn-default btn-sm' value='Post Comment'>
+				</div>
 			</form>
 		</div>
 	<hr>

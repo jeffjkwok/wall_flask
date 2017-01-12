@@ -1,0 +1,25 @@
+h1{
+  margin-left: .25em;
+  font-size: 5em;
+}
+
+ul a {
+  float: right;
+}
+
+textarea{
+  resize: none;
+}
+
+#msg{
+  margin-left: 1.75em;
+}
+
+.message{
+  font-size: 1.5em;
+  margin-left: 2em;
+}
+
+.comment{
+  margin-left: 6em;
+}

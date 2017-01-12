@@ -54,7 +54,10 @@ def login_reg():
 			flash('Email cannot be blank or is invalid')
 		query = 'SELECT username FROM users WHERE email = "{}"'.format(request.form['email'])
 		user = mysql.query_db(query)
-		print user[0]
+		print user
+		if len(user) > 0:
+			validations +=1
+			flash('Email already in use!')
 		if len(request.form['password'])<4 or request.form['password'] != request.form['c_password']:
 			validations +=1
 			flash('Password cannot be blank or does not match')
