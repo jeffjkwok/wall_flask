@@ -1,32 +1,77 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Login | The Wall</title>
+	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css')}}">
 </head>
 <body>
-	<h1>Register</h1>
-	{% with messages = get_flashed_messages() %}
-		{% if messages %}
-			{% for message in messages %}
-				<p>{{message}}</p>
-			{% endfor %}
-		{% endif %}
-	{% endwith %}
-	<form action='/process' method='post'>
-		<input type="hidden" name="register">
-		Username: <input type="text" name="username"><br>
-		Email: <input type="text" name="email"><br>
-		Password: <input type="text" name="password"><br>
-		Confirm Password: <input type="text" name="c_password"><br>
-		<input type="submit" value='Register'>
-	</form>
+	{% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+	<p>{{message}}</p>
+	{% endfor %} {% endif %} {% endwith %}
+	<div id='form' class='container'>
+		<h1>Register</h1>
+		<form action='/process' method='post' class='form-horiztonal'>
+			<input type="hidden" name="register">
+			<div class="form-group">
+				<div class="col-sm-7 col-md-7 col-lg-7" style="display:inline">
+					<label for='name' class='control-label'>Username:</label>
+					<input type="text" class='form-control' name="username" id='name'>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-7 col-md-7 col-lg-7" style="display:inline">
+					<label for='email' class='control-label'>Email:</label>
+					<input type="text" class='form-control' name="email" id='email'>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-7 col-md-7 col-lg-7" style="display:inline">
+					<label for='pwd' class='control-label'>Password:</label>
+					<input type="password" class='form-control' name="password" id='pwd'>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-7 col-md-7 col-lg-7" style="display:inline">
+					<label for='cpwd' class='control-label'>Confirm Password:</label>
+					<input type="password" class='form-control' name="c_password" id='cpwd'>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-10">
+					<input type="submit" class='btn btn-default' value='Register'>
+				</div>
+			</div>
+		</form>
+	</div>
+	<br>
 	<hr>
-	<h1>Login</h1>
-	<form action='/process' method='post'>
-		<input type="hidden" name="login">
-		Email: <input type="text" name="email"><br>
-		Password:<input type="text" name="password"><br>
-		<input type="submit" value='Login'>
-	</form>
+	<div id='form2' class='container'>
+		<h1>Login</h1>
+		<form action='/process' method='post' class='form-horizontal'>
+			<input type="hidden" name="login">
+			<div class="form-group">
+				<div class="col-sm-7 col-md-7 col-lg-7" style="display:inline">
+					<label for="email_l">Email:</label>
+					<input type="text" class='form-control' name="email" id="email_l">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-7 col-md-7 col-lg-7" style="display:inline">
+					<label for="pwd_l">Password:</label>
+					<input type="password" class='form-control' name="password" id='pwd_l'>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-10">
+					<input type="submit" class='btn btn-default' value='Login'>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
+<script src="../static/js/jquery-3.1.1.min.js" charset="utf-8"></script>
+<script src="../static/js/bootstrap.min.js" charset="utf-8"></script>
+
 </html>

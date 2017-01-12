@@ -23,13 +23,13 @@ def login_reg():
 		if len(request.form['password'])<1:
 			validations +=1
 			flash('Password was empty')
-
 		if validations == 0 :
 			query = 'SELECT password, username, id FROM users WHERE email = "{}"'.format(request.form['email'])
 			user = mysql.query_db(query)
 			if user and bcrypt.check_password_hash(user[0]['password'], request.form['password']):
 				session['username'] = user[0]['username']
 				session['id'] = user[0]['id']
+				print 'cat'
 				return redirect('/dashboard')
 		return redirect('/')
 
@@ -44,7 +44,6 @@ def login_reg():
 		if len(request.form['password'])<4 or request.form['password'] != request.form['c_password']:
 			validations +=1
 			flash('Password cannot be blank or does not match')
-
 		if validations == 0 :
 			password = bcrypt.generate_password_hash(request.form['password'])
 			query = 'INSERT INTO users (username, email, password, created_at, updated_at) VALUES (:username, :email, :password, NOW(), NOW())'

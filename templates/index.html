@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>The Wall</title>
+	<link rel="stylesheet" href="../static/bootstrap.min.css">
 	<style type="text/css">
 		#comment {
 			margin-left: 20px;
@@ -19,12 +20,12 @@
 	</form>
 	<hr>
 	{% for message in messages %}
-		{{message['username']}} posted: 
+		{{message['username']}} posted:
 		<p>{{message['content']}}</p>
 		<div id='comment'>
 			{% for comment in comments %}
 				{% if message['id'] == comment['message_id'] %}
-					{{comment['username']}} commented: 
+					{{comment['username']}} commented:
 					<p>{{comment['content']}}</p>
 				{% endif %}
 			{% endfor %}
