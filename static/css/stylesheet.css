@@ -1,11 +1,16 @@
 #form, #form2{
   /*background-color: blue;*/
-  color: white;
-  background-color: #3a4f6b;
+  color: #424242;
+  background-color: white;
   padding: 3em;
   padding-top: 1em;
-  border-radius: .5em;
+  /*border-radius: .5em;*/
+  box-shadow: .25em .5em 1em;
   width: 25em;
+}
+
+.header{
+  text-align: center;
 }
 
 body{
@@ -17,19 +22,39 @@ h1{
   text-align: center;
   color: #454545;
   font-weight: bold;
-  font-size: 7em
+  font-size: 5em;
+  padding: .25em 0;
+  display: inline-block;
+  font-family: "HsUSA", sans-serif;
 }
 
 a{
-  color: orange;
+  color: #538fb5;
 }
 
 a:hover{
-  color:white;
+  color:black;
 }
 
 .alert{
   text-align: center;
   width: 55em;
   margin: auto;
+}
+
+.logo img{
+  vertical-align: top;;
+  height: 5em;
+  display: inline-block;
+  margin-top: 3em;
+  margin-right: 1em;
+}
+
+h2{
+  padding-bottom: .5em;
+}
+
+@font-face {
+  font-family: hsUSA;
+  src: url("../static/fonts/hsUSA.ttf")
 }

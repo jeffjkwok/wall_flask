@@ -5,11 +5,14 @@
 	<title>Login | The Wall</title>
 	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/stylesheet.css">
+	<link href="https://fonts.googleapis.com/css?family=Wallpoet" rel="stylesheet">
 	<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css')}}"> -->
 </head>
 <body>
 	<div class="header">
-		<h1>The Wall</h1>
+		<div class="logo">
+			<img src="../static/images/wall.svg" alt=""><h1>The Wall</h1>
+		</div>
 		{% with messages = get_flashed_messages() %}
 		{% if messages %}
 		{% for message in messages %}
@@ -24,7 +27,7 @@
 	<!-- <h1>The Wall <sup>*without Matt Damon</sup></h1> -->
 	{% if session['reg'] != True %}
 	<div id='form' class='container'>
-		<h3>Register</h3>
+		<h2>Register</h2>
 		<form action='/process' method='post' class='form-horizontal'>
 			<input type="hidden" name="register">
 			<div class="form-group">
@@ -53,19 +56,19 @@
 			</div>
 			<div class="form-group">
 				<div class="col-sm-10">
-					<input type="submit" class='btn btn-default' value='Register'>
+					<input type="submit" class='btn btn-primary' value='Register'>
 				</div>
 			</div>
 		</form>
 		<form action="/" method='post' class='toggle'>
 			<input type="hidden" value=''>
-			<a>Have an account? Click Here</a>
+			<a>Have an account? Register here!</a>
 		</form>
 	</div>
 {% endif %}
 {% if session['reg'] == True %}
 	<div id='form2' class='container'>
-		<h3>Login</h3>
+		<h2>Login</h2>
 		<form action='/process' method='post' class='form-horizontal'>
 			<input type="hidden" name="login">
 			<div class="form-group">
@@ -82,13 +85,13 @@
 			</div>
 			<div class="form-group">
 				<div class="col-sm-10">
-					<input type="submit" class='btn btn-default' value='Login'>
+					<input type="submit" class='btn btn-primary' value='Login'>
 				</div>
 			</div>
 		</form>
 		<form action="/" method='post' class='toggle'>
 			<input type="hidden" value=''>
-			<a>Don't have an account? Click Here</a>
+			<a>Don't have an account? Login!</a>
 		</form>
 	</div>
 {% endif %}

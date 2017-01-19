@@ -78,7 +78,7 @@ def login_reg():
 			return redirect('/dashboard')
 		elif validations >= 1:
 			return redirect('/')
-	return redirect('/')
+	# return redirect('/')
 
 @app.route('/dashboard')
 def dashboard():
@@ -88,7 +88,6 @@ def dashboard():
 	messages = mysql.query_db(query)
 	query = "SELECT comments.content, comments.created_at, users.username, posts.id AS message_id FROM comments LEFT JOIN users ON comments.user_id=users.id LEFT JOIN posts ON comments.post_id=posts.id"
 	comments = mysql.query_db(query)
-	# print comments
 
 	return render_template('index.html', messages=messages, comments=comments)
 
